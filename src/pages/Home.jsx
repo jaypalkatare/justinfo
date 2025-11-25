@@ -102,7 +102,7 @@ const Home = () => {
             transition={{ delay: 0.3 }}
             className="text-2xl md:text-4xl font-light mb-4 text-gray-700 dark:text-gray-300"
           >
-            Anytime. Anywhere. Anything
+            Anytime. Anywhere.
           </motion.p>
           
           <motion.p
