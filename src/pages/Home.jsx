@@ -103,7 +103,7 @@ const Home = () => {
             transition={{ delay: 0.3 }}
             className="home__subtitle"
           >
-            Anytime. Anywhere. No sign up required.
+            Anytime. Anywhere.
           </motion.p>
           
           <motion.p
