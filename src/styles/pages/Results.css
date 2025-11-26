@@ -1,0 +1,96 @@
+.results-page {
+  @apply min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6;
+}
+
+.results-container {
+  @apply max-w-4xl mx-auto;
+}
+
+.results-success {
+  @apply text-center mb-12;
+}
+
+.results-icon-wrapper {
+  @apply inline-block;
+}
+
+.results-icon {
+  @apply w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 rounded-full flex items-center justify-center;
+}
+
+.results-title {
+  @apply text-3xl sm:text-4xl md:text-5xl font-bold mb-4;
+}
+
+.results-subtitle {
+  @apply text-lg text-gray-600 dark:text-gray-400;
+}
+
+.results-card {
+  @apply rounded-2xl p-6 sm:p-8 mb-8;
+}
+
+.results-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-center;
+}
+
+.results-section-title {
+  @apply text-lg font-semibold text-gray-600 dark:text-gray-400 mb-4;
+}
+
+.results-file-card {
+  @apply rounded-xl p-4;
+}
+
+.results-file-shell {
+  @apply flex items-center gap-4;
+}
+
+.results-file-icon {
+  @apply w-16 h-16 rounded-lg flex items-center justify-center text-2xl;
+}
+
+.results-file-name {
+  @apply font-semibold truncate;
+}
+
+.results-file-meta {
+  @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+.results-preview-card {
+  @apply rounded-2xl p-6 sm:p-8 mb-8;
+}
+
+.results-preview-box {
+  @apply rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 p-4;
+}
+
+.results-actions {
+  @apply flex flex-col sm:flex-row gap-4 justify-center;
+}
+
+.results-primary-btn {
+  @apply w-full sm:w-auto justify-center px-8 py-4 bg-gradient-to-r from-neon-blue via-neon-pink to-neon-purple text-white rounded-full font-semibold text-lg shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center gap-3;
+}
+
+.results-secondary-btn {
+  @apply w-full sm:w-auto justify-center px-8 py-4 text-white rounded-full font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center gap-3;
+}
+
+.results-empty-wrapper {
+  @apply min-h-screen flex items-center justify-center;
+}
+
+.results-empty-card {
+  @apply text-center;
+}
+
+.results-empty-text {
+  @apply text-xl text-gray-500 dark:text-gray-400 mb-4;
+}
+
+.results-empty-btn {
+  @apply px-6 py-3 rounded-lg text-white transition-colors;
+}
+

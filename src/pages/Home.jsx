@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { FileUp, Image, Video, Music, FileText, Archive, Box, Sparkles } from 'lucide-react'
 import { FILE_CATEGORIES } from '../utils/fileFormats'
 import { useTheme } from '../contexts/ThemeContext'
+import '../styles/pages/Home.css'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -22,11 +23,11 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden relative">
+    <div className="home">
       {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="home__background">
         <motion.div
-          className="absolute top-20 left-20 w-72 h-72 bg-neon-blue/20 rounded-full blur-3xl"
+          className="home__bubble home__bubble--blue"
           animate={{
             x: [0, 100, 0],
             y: [0, -100, 0],
@@ -38,7 +39,7 @@ const Home = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-96 h-96 bg-neon-pink/20 rounded-full blur-3xl"
+          className="home__bubble home__bubble--pink"
           animate={{
             x: [0, -100, 0],
             y: [0, 100, 0],
@@ -52,11 +53,11 @@ const Home = () => {
       </div>
 
       {/* Navigation */}
-      <nav className="relative z-10 p-6 flex justify-between items-center">
+      <nav className="home__nav">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-2xl font-bold gradient-text"
+          className="home__brand gradient-text"
         >
           JustInfo
         </motion.div>
@@ -64,34 +65,34 @@ const Home = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate('/settings')}
-          className="p-2 rounded-lg glass hover:bg-white/20 transition-colors"
+          className="home__settings-btn glass"
         >
           ⚙️
         </motion.button>
       </nav>
 
       {/* Hero Section */}
-      <div className="relative z-10 container mx-auto px-6 py-20">
+      <div className="home__hero">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="home__hero-content"
         >
           <motion.div
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-block mb-6"
+            className="home__hero-icon"
           >
-            <Sparkles className="w-16 h-16 text-neon-blue mx-auto mb-4" />
+            <Sparkles className="home__sparkles-icon" />
           </motion.div>
           
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-6xl md:text-8xl font-extrabold mb-6 gradient-text"
+            className="home__title gradient-text"
           >
             Convert Anything
           </motion.h1>
@@ -100,7 +101,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-2xl md:text-4xl font-light mb-4 text-gray-700 dark:text-gray-300"
+            className="home__subtitle"
           >
             Anytime. Anywhere.
           </motion.p>
@@ -109,7 +110,7 @@ const Home = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+            className="home__description"
           >
             Universal file converter supporting images, videos, audio, documents, archives, and 3D formats
           </motion.p>
@@ -119,16 +120,16 @@ const Home = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="flex justify-center mb-16"
+          // transition={{ delay: 0.5 }}
+          className="home__upload"
         >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/format-selection')}
-            className="group px-8 py-4 bg-gradient-to-r from-neon-blue via-neon-pink to-neon-purple text-white rounded-full font-semibold text-lg shadow-lg glow hover:shadow-2xl transition-all duration-300 flex items-center gap-3"
+            className="home__upload-button glow group"
           >
-            <FileUp className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+            <FileUp className="home__upload-icon group-hover:rotate-12" />
             Start Converting
           </motion.button>
         </motion.div>
@@ -137,8 +138,7 @@ const Home = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto"
+          className="home__category-grid"
         >
           {categoryCards.map((item, index) => {
             const category = FILE_CATEGORIES[item.key]
@@ -148,29 +148,21 @@ const Home = () => {
                 key={item.key}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 + index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 onClick={() => handleCategoryClick(item.key)}
-                className="group relative cursor-pointer"
+                className="home__category-card group"
               >
                 <motion.div
-                  className={`glass rounded-2xl p-6 text-center backdrop-blur-xl border-2 transition-all duration-300 ${
-                    isDark ? 'border-gray-700 hover:border-neon-blue' : 'border-gray-200 hover:border-neon-blue'
+                  className={`home__category-card-inner glass ${
+                    isDark ? 'home__category-card-inner--dark' : 'home__category-card-inner--light'
                   }`}
-                  whileHover={{ 
-                    boxShadow: '0 0 30px rgba(0, 240, 255, 0.5)',
-                  }}
                 >
                   <motion.div
-                    className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center`}
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
+                    className={`home__category-icon bg-gradient-to-r ${category.color}`}
                   >
                     <Icon className="w-8 h-8 text-white" />
                   </motion.div>
-                  <h3 className="text-lg font-semibold mb-2">{category.name}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <h3 className="home__category-title">{category.name}</h3>
+                  <p className="home__category-text">
                     {category.formats.length} formats
                   </p>
                 </motion.div>
@@ -184,7 +176,7 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3 }}
-          className="mt-20 grid grid-cols-3 gap-8 max-w-3xl mx-auto text-center"
+          className="home__stats-grid"
         >
           {[
             { label: 'File Formats', value: '100+' },
@@ -196,10 +188,10 @@ const Home = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.4 + index * 0.1 }}
-              className="glass rounded-xl p-6"
+                className="home__stats-card glass"
             >
-              <div className="text-3xl font-bold gradient-text mb-2">{stat.value}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+                <div className="home__stats-value">{stat.value}</div>
+                <div className="home__stats-label">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>

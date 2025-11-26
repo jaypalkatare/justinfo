@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Upload, X, File, CheckCircle2 } from 'lucide-react'
 import { formatFileSize, getCategoryByExtension } from '../utils/fileFormats'
+import '../styles/components/FileUpload.css'
 
 const FileUpload = ({ onFileSelect, selectedFile }) => {
   const [isDragging, setIsDragging] = useState(false)
@@ -81,7 +82,7 @@ const FileUpload = ({ onFileSelect, selectedFile }) => {
   }
 
   return (
-    <div className="w-full">
+    <div className="upload">
       <AnimatePresence mode="wait">
         {!selectedFile ? (
           <motion.div
@@ -93,30 +94,23 @@ const FileUpload = ({ onFileSelect, selectedFile }) => {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`
-              relative border-2 border-dashed rounded-2xl p-12 text-center
-              transition-all duration-300 cursor-pointer
-              ${isDragging 
-                ? 'border-neon-blue bg-neon-blue/10 scale-105' 
-                : 'border-gray-300 dark:border-gray-700 hover:border-neon-blue/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/50'
-              }
-            `}
+            className={`upload-dropzone ${isDragging ? 'upload-dropzone--active' : 'upload-dropzone--idle'}`}
             onClick={() => document.getElementById('file-input').click()}
           >
             <motion.div
               animate={isDragging ? { scale: [1, 1.1, 1] } : {}}
               transition={{ duration: 0.5, repeat: isDragging ? Infinity : 0 }}
             >
-              <Upload className={`w-16 h-16 mx-auto mb-4 ${isDragging ? 'text-neon-blue' : 'text-gray-400'}`} />
+              <Upload className={`upload-icon ${isDragging ? 'text-neon-blue' : 'text-gray-400'}`} />
             </motion.div>
             
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="upload-heading">
               {isDragging ? 'Drop your file here' : 'Drag & Drop your file'}
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-4">
+            <p className="upload-subtext">
               or click to browse
             </p>
-            <p className="text-sm text-gray-400 dark:text-gray-500">
+            <p className="upload-hint">
               Supports all major file formats
             </p>
             
@@ -149,40 +143,40 @@ const FileUpload = ({ onFileSelect, selectedFile }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="glass rounded-2xl p-6 relative"
+            className="upload-preview glass"
           >
             <button
               onClick={removeFile}
-              className="absolute top-4 right-4 p-2 rounded-full bg-red-500/20 hover:bg-red-500/30 text-red-500 transition-colors"
+              className="upload-remove-btn"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="upload-preview-body">
               {preview ? (
                 <motion.img
                   src={preview}
                   alt="Preview"
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
-                  className="w-32 h-32 object-cover rounded-lg"
+                  className="upload-preview-image"
                 />
               ) : (
-                <div className="w-32 h-32 rounded-lg bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center text-5xl">
+                <div className="upload-preview-icon bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600">
                   {getCategoryIcon(selectedFile.name)}
                 </div>
               )}
 
-              <div className="flex-1 text-left">
-                <div className="flex items-center gap-2 mb-2">
+              <div className="upload-preview-details">
+                <div className="upload-file-title">
                   <File className="w-5 h-5 text-neon-blue" />
-                  <h3 className="text-lg font-semibold truncate">{selectedFile.name}</h3>
+                  <h3 className="upload-file-name">{selectedFile.name}</h3>
                   <CheckCircle2 className="w-5 h-5 text-green-500" />
                 </div>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                <p className="upload-file-meta mb-1">
                   Size: {formatFileSize(selectedFile.size)}
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="upload-file-meta">
                   Type: {selectedFile.type || 'Unknown'}
                 </p>
               </div>

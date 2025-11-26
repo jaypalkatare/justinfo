@@ -1,0 +1,84 @@
+.settings-page {
+  @apply min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6;
+}
+
+.settings-container {
+  @apply max-w-4xl mx-auto;
+}
+
+.settings-header {
+  @apply mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.settings-back-btn {
+  @apply flex items-center justify-center gap-2 px-4 py-2 rounded-lg hover:bg-white/20 transition-colors w-full sm:w-auto;
+}
+
+.settings-title {
+  @apply text-2xl sm:text-3xl font-bold flex items-center gap-2;
+}
+
+.settings-cards {
+  @apply space-y-5 sm:space-y-6;
+}
+
+.settings-card {
+  @apply rounded-2xl p-5 sm:p-6;
+}
+
+.settings-card-header {
+  @apply flex items-center gap-4 mb-4 flex-wrap;
+}
+
+.settings-card-icon {
+  @apply w-12 h-12 rounded-full flex items-center justify-center;
+}
+
+.settings-card-title {
+  @apply text-xl font-semibold;
+}
+
+.settings-card-text {
+  @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+.settings-action-button {
+  @apply flex flex-col sm:flex-row items-center gap-3 px-6 py-3 rounded-xl hover:bg-white/20 transition-colors w-full text-center sm:text-left;
+}
+
+.settings-select {
+  @apply w-full px-6 py-3 rounded-xl hover:bg-white/20 transition-colors cursor-pointer;
+}
+
+.settings-quality {
+  @apply space-y-4;
+}
+
+.settings-quality-label {
+  @apply flex items-center justify-between;
+}
+
+.settings-quality-text {
+  @apply text-sm text-gray-600 dark:text-gray-400;
+}
+
+.settings-quality-subtext {
+  @apply text-sm text-gray-500 dark:text-gray-500;
+}
+
+.settings-range {
+  @apply w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-neon-blue;
+}
+
+.settings-range-hint {
+  @apply flex justify-between text-xs text-gray-500 dark:text-gray-500;
+}
+
+.settings-info {
+  @apply mt-8 rounded-2xl p-5 sm:p-6 text-center;
+}
+
+.settings-info-text {
+  @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
