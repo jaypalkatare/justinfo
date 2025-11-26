@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Moon, Sun, Globe, Sliders, Sparkles } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useState } from 'react'
+import '../styles/pages/Settings.css'
 
 const Settings = () => {
   const navigate = useNavigate()
@@ -27,7 +28,7 @@ const Settings = () => {
       action: (
         <button
           onClick={toggleTheme}
-          className="flex items-center gap-3 px-6 py-3 glass rounded-xl hover:bg-white/20 transition-colors w-full"
+          className="settings-action-button glass"
         >
           {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           <span className="flex-1 text-left">Use {isDark ? 'Light' : 'Dark'} Mode</span>
@@ -49,7 +50,7 @@ const Settings = () => {
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
-            className="w-full px-6 py-3 glass rounded-xl hover:bg-white/20 transition-colors cursor-pointer"
+            className="settings-select glass"
           >
             {languages.map(lang => (
               <option key={lang.code} value={lang.code}>
@@ -65,10 +66,10 @@ const Settings = () => {
       icon: Sliders,
       description: 'Adjust the quality of converted files',
       action: (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Quality: {quality}%</span>
-            <span className="text-sm text-gray-500 dark:text-gray-500">
+        <div className="settings-quality">
+          <div className="settings-quality-label">
+            <span className="settings-quality-text">Quality: {quality}%</span>
+            <span className="settings-quality-subtext">
               {quality < 50 ? 'Fast' : quality < 80 ? 'Balanced' : 'High'}
             </span>
           </div>
@@ -78,9 +79,9 @@ const Settings = () => {
             max="100"
             value={quality}
             onChange={(e) => setQuality(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-neon-blue"
+            className="settings-range"
           />
-          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-500">
+          <div className="settings-range-hint">
             <span>Lower Size</span>
             <span>Better Quality</span>
           </div>
@@ -90,22 +91,22 @@ const Settings = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="settings-page">
+      <div className="settings-container">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8 flex items-center justify-between"
+          className="settings-header"
         >
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 px-4 py-2 glass rounded-lg hover:bg-white/20 transition-colors"
+            className="settings-back-btn glass"
           >
             <ArrowLeft className="w-5 h-5" />
             Back
           </button>
-          <h1 className="text-3xl font-bold gradient-text flex items-center gap-2">
+          <h1 className="settings-title gradient-text">
             <Sparkles className="w-8 h-8" />
             Settings
           </h1>
@@ -113,7 +114,7 @@ const Settings = () => {
         </motion.div>
 
         {/* Settings Cards */}
-        <div className="space-y-6">
+        <div className="settings-cards">
           {settings.map((setting, index) => {
             const Icon = setting.icon
             return (
@@ -122,15 +123,15 @@ const Settings = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="glass rounded-2xl p-6"
+                className="settings-card glass"
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-neon-blue to-neon-pink flex items-center justify-center">
+                <div className="settings-card-header">
+                  <div className="settings-card-icon bg-gradient-to-r from-neon-blue to-neon-pink">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">{setting.title}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <h3 className="settings-card-title">{setting.title}</h3>
+                    <p className="settings-card-text">
                       {setting.description}
                     </p>
                   </div>
@@ -148,9 +149,9 @@ const Settings = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-8 glass rounded-2xl p-6 text-center"
+          className="settings-info glass"
         >
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="settings-info-text">
             Settings are automatically saved to your browser
           </p>
         </motion.div>

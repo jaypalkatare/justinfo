@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Loader2, Zap, Sparkles } from 'lucide-react'
 import { useFileContext } from '../contexts/FileContext'
 import { simulateConversion } from '../utils/conversion'
+import '../styles/pages/Conversion.css'
 
 const Conversion = () => {
   const navigate = useNavigate()
@@ -37,16 +38,16 @@ const Conversion = () => {
   }, [file, outputFormat, navigate, saveResult])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-6">
-      <div className="max-w-2xl w-full text-center">
+    <div className="conversion-page">
+      <div className="conversion-container">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="glass rounded-3xl p-12"
+          className="conversion-card glass"
         >
           {/* 3D Loader Animation */}
           <motion.div
-            className="relative w-32 h-32 mx-auto mb-8"
+            className="conversion-loader"
             style={{ perspective: '1000px' }}
           >
             <motion.div
@@ -91,22 +92,22 @@ const Conversion = () => {
           </motion.div>
 
           {/* Progress Bar */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
+          <div className="conversion-status">
+            <div className="conversion-progress-info">
               <motion.h2
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-2xl font-bold gradient-text flex items-center gap-2 justify-center"
+                className="conversion-title gradient-text"
               >
                 <Zap className="w-6 h-6" />
                 Converting...
               </motion.h2>
-              <span className="text-lg font-semibold text-gray-600 dark:text-gray-400">
+              <span className="conversion-percentage">
                 {progress}%
               </span>
             </div>
             
-            <div className="relative h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="conversion-progress-bar">
               <motion.div
                 className="absolute inset-y-0 left-0 bg-gradient-to-r from-neon-blue via-neon-pink to-neon-purple"
                 initial={{ width: 0 }}
@@ -133,12 +134,12 @@ const Conversion = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-8 space-y-2"
+            className="conversion-file-info"
           >
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="conversion-file-text">
               Converting <span className="font-semibold text-neon-blue">{file?.name}</span>
             </p>
-            <p className="text-gray-500 dark:text-gray-500">
+            <p className="conversion-file-subtext">
               to <span className="font-semibold text-neon-pink">{outputFormat?.toUpperCase()}</span>
             </p>
           </motion.div>
@@ -148,25 +149,25 @@ const Conversion = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="mt-6 space-y-2"
+            className="conversion-messages"
           >
             {progress < 25 && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 animate-pulse">
+              <p className="conversion-message animate-pulse">
                 Analyzing file structure...
               </p>
             )}
             {progress >= 25 && progress < 50 && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 animate-pulse">
+              <p className="conversion-message animate-pulse">
                 Processing file data...
               </p>
             )}
             {progress >= 50 && progress < 75 && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 animate-pulse">
+              <p className="conversion-message animate-pulse">
                 Converting format...
               </p>
             )}
             {progress >= 75 && progress < 100 && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 animate-pulse">
+              <p className="conversion-message animate-pulse">
                 Finalizing conversion...
               </p>
             )}
@@ -174,7 +175,7 @@ const Conversion = () => {
               <motion.p
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
-                className="text-sm text-green-500 font-semibold"
+                className="conversion-success"
               >
                 ✓ Conversion complete!
               </motion.p>

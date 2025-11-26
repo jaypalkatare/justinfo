@@ -1,0 +1,60 @@
+.conversion-page {
+  @apply min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4 sm:p-6;
+}
+
+.conversion-container {
+  @apply max-w-2xl w-full text-center;
+}
+
+.conversion-card {
+  @apply rounded-3xl p-8 sm:p-12;
+}
+
+.conversion-loader {
+  @apply relative w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-8;
+}
+
+.conversion-status {
+  @apply mb-6;
+}
+
+.conversion-progress-info {
+  @apply flex flex-wrap items-center justify-between gap-3 mb-2;
+}
+
+.conversion-title {
+  @apply text-xl sm:text-2xl font-bold flex items-center gap-2 justify-center;
+}
+
+.conversion-percentage {
+  @apply text-lg font-semibold text-gray-600 dark:text-gray-400;
+}
+
+.conversion-progress-bar {
+  @apply relative h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden;
+}
+
+.conversion-file-info {
+  @apply mt-8 space-y-2;
+}
+
+.conversion-file-text {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+.conversion-file-subtext {
+  @apply text-gray-500 dark:text-gray-500;
+}
+
+.conversion-messages {
+  @apply mt-6 space-y-2;
+}
+
+.conversion-message {
+  @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+.conversion-success {
+  @apply text-sm text-green-500 font-semibold;
+}
+

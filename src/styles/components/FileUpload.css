@@ -1,0 +1,68 @@
+.upload {
+  @apply w-full;
+}
+
+.upload-dropzone {
+  @apply relative border-2 border-dashed rounded-2xl p-8 sm:p-12 text-center transition-all duration-300 cursor-pointer;
+}
+
+.upload-dropzone--active {
+  @apply border-neon-blue bg-neon-blue/10 scale-105;
+}
+
+.upload-dropzone--idle {
+  @apply border-gray-300 dark:border-gray-700 hover:border-neon-blue/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/50;
+}
+
+.upload-icon {
+  @apply w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4;
+}
+
+.upload-heading {
+  @apply text-xl font-semibold mb-2;
+}
+
+.upload-subtext {
+  @apply text-gray-500 dark:text-gray-400 mb-4;
+}
+
+.upload-hint {
+  @apply text-sm text-gray-400 dark:text-gray-500;
+}
+
+.upload-preview {
+  @apply rounded-2xl p-5 sm:p-6 relative;
+}
+
+.upload-remove-btn {
+  @apply absolute top-4 right-4 p-2 rounded-full bg-red-500/20 hover:bg-red-500/30 text-red-500 transition-colors;
+}
+
+.upload-preview-body {
+  @apply flex flex-col md:flex-row items-center gap-6;
+}
+
+.upload-preview-image {
+  @apply w-32 h-32 object-cover rounded-lg;
+}
+
+.upload-preview-icon {
+  @apply w-32 h-32 rounded-lg flex items-center justify-center text-5xl;
+}
+
+.upload-preview-details {
+  @apply flex-1 text-center md:text-left;
+}
+
+.upload-file-title {
+  @apply flex items-center justify-center md:justify-start gap-2 mb-2;
+}
+
+.upload-file-name {
+  @apply text-lg font-semibold truncate;
+}
+
+.upload-file-meta {
+  @apply text-sm text-gray-500 dark:text-gray-400;
+}
+

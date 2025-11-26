@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react'
 import FileUpload from '../components/FileUpload'
-import { FILE_CATEGORIES, getCategoryByExtension, getSupportedOutputFormats, formatFileSize } from '../utils/fileFormats'
+import { FILE_CATEGORIES, getCategoryByExtension, getSupportedOutputFormats } from '../utils/fileFormats'
 import { useFileContext } from '../contexts/FileContext'
+import '../styles/pages/FormatSelection.css'
 
 const FormatSelection = () => {
   const navigate = useNavigate()
@@ -57,22 +58,22 @@ const FormatSelection = () => {
   const categoryInfo = getCategoryInfo()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="format-page">
+      <div className="format-container">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8 flex items-center justify-between"
+          className="format-header"
         >
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 px-4 py-2 glass rounded-lg hover:bg-white/20 transition-colors"
+            className="format-back-btn glass"
           >
             <ArrowLeft className="w-5 h-5" />
             Back
           </button>
-          <h1 className="text-3xl font-bold gradient-text flex items-center gap-2">
+          <h1 className="format-title gradient-text">
             <Sparkles className="w-8 h-8" />
             Select Output Format
           </h1>
@@ -84,7 +85,7 @@ const FormatSelection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-8"
+          className="format-upload"
         >
           <FileUpload onFileSelect={handleFileSelect} selectedFile={selectedFile} />
         </motion.div>
@@ -99,7 +100,7 @@ const FormatSelection = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ delay: 0.2 }}
             >
-              <h2 className="text-2xl font-semibold mb-6">Choose Output Format</h2>
+              <h2 className="format-section-title">Choose Output Format</h2>
               
               <div className="space-y-6">
                 {Object.entries(availableFormats).map(([category, formats], idx) => {
@@ -114,27 +115,25 @@ const FormatSelection = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.3 + idx * 0.1 }}
-                      className="glass rounded-xl p-6"
+                      className="format-category glass"
                     >
-                      <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                      <h3 className="format-category-title">
                         <span>{categoryData.icon || '📁'}</span>
                         {categoryData.name || category.charAt(0).toUpperCase() + category.slice(1)}
                       </h3>
                       
-                      <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+                      <div className="format-grid">
                         {formats.map((format) => (
                           <motion.button
                             key={format}
                             whileHover={{ scale: 1.1, y: -5 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => handleFormatSelect(format)}
-                            className={`
-                              relative p-4 rounded-lg border-2 transition-all duration-300
-                              ${selectedOutput === format
-                                ? 'border-neon-blue bg-neon-blue/20 glow'
-                                : 'border-gray-300 dark:border-gray-700 hover:border-neon-blue/50 bg-white/50 dark:bg-gray-800/50'
-                              }
-                            `}
+                            className={`format-option ${
+                              selectedOutput === format
+                                ? 'format-option--selected glow'
+                                : 'format-option--default'
+                            }`}
                             style={{
                               perspective: '1000px'
                             }}
@@ -144,8 +143,8 @@ const FormatSelection = () => {
                               transition={{ duration: 0.5 }}
                               className="text-center"
                             >
-                              <div className="text-2xl font-bold mb-1">{format.toUpperCase()}</div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                              <div className="format-option-code">{format.toUpperCase()}</div>
+                              <div className="format-option-text">
                                 {category}
                               </div>
                             </motion.div>
@@ -162,13 +161,13 @@ const FormatSelection = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-8 flex justify-end"
+                  className="format-continue"
                 >
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleContinue}
-                    className="px-8 py-4 bg-gradient-to-r from-neon-blue via-neon-pink to-neon-purple text-white rounded-full font-semibold text-lg shadow-lg glow hover:shadow-2xl transition-all duration-300 flex items-center gap-3"
+                    className="format-continue-btn glow"
                   >
                     Continue
                     <ArrowRight className="w-5 h-5" />
@@ -182,7 +181,7 @@ const FormatSelection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="text-center py-20 glass rounded-xl"
+              className="format-empty glass"
             >
               <p className="text-xl text-gray-500 dark:text-gray-400">
                 Upload a file to see available conversion formats
